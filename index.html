@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yang Wan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 190px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .header-info h1 {
+            font-size: 26px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .header-info .chinese {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .header-info .position {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .header-info .affiliation {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .contact-info {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .contact-info a {
+            color: #1e6bb8;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+
+        .bio {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .bio a {
+            color: #1e6bb8;
+            text-decoration: none;
+        }
+
+        .bio a:hover {
+            text-decoration: underline;
+        }
+
+        .section-content {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .publication-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+
+        .pub-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .pub-authors {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .pub-authors strong {
+            color: #333;
+        }
+
+        .pub-venue {
+            font-size: 14px;
+            color: #888;
+            display: inline-block;
+        }
+
+        .pub-venue .accepted {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .pub-links {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .pub-links a {
+            color: #1e6bb8;
+            text-decoration: none;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+
+        .pub-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- <div class="pub-links"><a href="https://arxiv.org/abs/2602.03664">[Paper]</a></div> -->
+            <div class="profile-img"></div>
+            <div class="header-info">
+                <h1>Yang Wan</h1>
+                <div class="chinese">万扬</div>
+                <div class="position">Ph.D. Student</div>
+                <div class="affiliation">College of Computer Science and Technology, Zhejiang University</div>
+                <div class="contact-info">
+                    Email: <a href="mailto:wanyang@zju.edu.cn">wanyang@zju.edu.cn</a><br>
+                    <a href="https://openreview.net/profile?id=%7EYang_Wan1">OpenReview</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>About</h2>
+            <div class="bio">
+                I am a Ph.D. candidate in the College of Computer Science and Technology at Zhejiang University.
+                I received my B.Eng. (Honors) in Computer Science and Technology from Hangzhou Dianzi University.
+
+                <p style="margin-top: 10px;">
+                    My research aims to make reinforcement learning more efficient by extracting more learning from the experience it collects, and to make interaction with environments cheap and controllable, so that RL can scale to settings where exploration is expensive, including reinforcement learning in the real world. I am currently focusing on computer-use agents and multi-turn reinforcement learning.
+
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Selected Papers</h2>
+            <div class="publication-item">
+                <div class="pub-content">
+                    <div class="pub-title">Mitigating Conversational Inertia in Multi-Turn Agents</div>
+                    <div class="pub-authors"><strong>Yang Wan</strong>, Zheng Cao, Zhenhao Zhang, Zhengwen Zeng, Shuheng Shen, Changhua Meng, Linchao Zhu</div>
+                    <div class="pub-venue">ICML 2026 <span class="accepted">(Accepted)</span></div>
+                    <div class="pub-links"><a href="https://arxiv.org/abs/2602.03664">[Paper]</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Competitive Programming</h2>
+            <div class="section-content">
+                I have been involved in competitive programming (ICPC) for several years, earning a regional gold medal and several silver medals as a contestant, and I serve as a judge for ICPC regional contests.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
