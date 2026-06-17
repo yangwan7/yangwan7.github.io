@@ -1,0 +1,25 @@
+name: cleanup
+
+on:
+  workflow_run:
+    workflows: [deploy]
+    types: [completed]
+
+permissions:
+  actions: write
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api "/repos/$REPO/actions/runs/$RUN_ID/artifacts" \
+            --jq '.artifacts[].id' | while read id; do
+            gh api -X DELETE "/repos/$REPO/actions/artifacts/$id" || true
+          done
+          sleep 5
+          gh api -X DELETE "/repos/$REPO/actions/runs/$RUN_ID" || true

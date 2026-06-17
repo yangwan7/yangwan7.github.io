@@ -1,0 +1,70 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Verbose (LEAKS ALL FILE PATHS TO PUBLIC LOG)'
+        type: boolean
+        default: false
+  repository_dispatch:
+    types: [source-updated]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout private source
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.SOURCE_REPO }}
+          token: ${{ secrets.SOURCE_REPO_PAT }}
+          path: src
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Stage site files
+        run: |
+          test -d src/site || { echo "::error::src/site not found"; exit 1; }
+          mkdir -p staging
+          cp -a src/site/. staging/
+          rm -rf staging/.git staging/.github
+          # 数量校验，防止拷错目录
+          n=$(find staging -type f | wc -l)
+          echo "staged $n files"
+          [ "$n" -gt 0 ] || { echo "::error::empty"; exit 1; }
+
+      - name: Package silently
+        run: |
+          if [ "${{ inputs.debug }}" = "true" ]; then V=v; else V=; fi
+          tar --dereference --hard-dereference \
+              --directory staging \
+              -c${V}f "$RUNNER_TEMP/artifact.tar" \
+              --exclude=.git --exclude=.github .
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
